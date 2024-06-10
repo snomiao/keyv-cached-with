@@ -7,10 +7,14 @@ it("works in full-args call", async () => {
   const fn1 = KeyvCachedWith(kv, async (a: number) => `${a}/${++i}`) satisfies (
     a: number
   ) => Promise<string>;
-
   expect(await fn1(1)).toBe("1/1");
   expect(await fn1(5)).toBe("5/2");
   expect(await fn1(1)).toBe("1/1");
+
+  const fn2 = KeyvCachedWith(kv, async (a: number) => `${a}/${++i}`);
+  expect(await fn2(1)).toBe("1/1");
+  expect(await fn2(5)).toBe("5/2");
+  expect(await fn2(1)).toBe("1/1");
 });
 
 it("works with curry", async () => {

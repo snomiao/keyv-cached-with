@@ -1,13 +1,22 @@
 import Keyv from "keyv";
-import { F } from "ts-toolbelt";
 import md5 from "md5";
-import { curry, type AnyFunction, type ArgumentTypes } from "rambda";
-const _KeyvCachedWith =
-  <Fn extends AnyFunction, V extends Awaited<ReturnType<Fn>>>(
-    keyv: Keyv<V>,
-    fn: Fn
-  ) =>
-  async (...args: ArgumentTypes<Fn>): Promise<V> => {
+import { curry } from "rambda";
+
+export function KeyvCachedWith<V, Fn extends (...args: any) => V>(
+  keyv: Keyv<V>,
+  fn: Fn
+): (...args: Parameters<Fn>) => Promise<Awaited<ReturnType<Fn>>>;
+export function KeyvCachedWith<V>(
+  keyv: Keyv<V>
+): <Fn extends (...args: any) => V>(
+  fn: Fn
+) => (...args: Parameters<Fn>) => Promise<Awaited<ReturnType<Fn>>>;
+export function KeyvCachedWith<
+  Fn extends (...args: any) => any,
+  V extends ReturnType<Fn> = ReturnType<Fn>
+>(keyv: Keyv<V>, fn?: Fn) {
+  if (!fn) return curry(KeyvCachedWith)(keyv);
+  return async (...args: Parameters<Fn>) => {
     const key =
       md5(String(fn)).slice(0, 8) +
       md5(JSON.stringify(args.slice(0, fn.length))).slice(0, 8);
@@ -17,7 +26,4 @@ const _KeyvCachedWith =
     await keyv.set(key, result);
     return result;
   };
-
-export const KeyvCachedWith = curry(_KeyvCachedWith) as F.Curry<
-  typeof _KeyvCachedWith
->;
+}

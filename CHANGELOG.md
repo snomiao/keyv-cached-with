@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.8](https://github.com/snomiao/keyv-cached-with/compare/v0.0.6...v0.0.8) (2024-06-10)
+
+
+### Bug Fixes
+
+* **main:** shorten hash ([49ee2c9](https://github.com/snomiao/keyv-cached-with/commit/49ee2c949c7e9057a2276c065ffee52d62f08a75))
+
 ## [0.0.6](https://github.com/snomiao/keyv-cached-with/compare/v0.0.5...v0.0.6) (2024-06-10)
 
 ## [0.0.5](https://github.com/snomiao/keyv-cached-with/compare/v0.0.4...v0.0.5) (2024-06-10)

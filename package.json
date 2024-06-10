@@ -1,6 +1,6 @@
 {
   "name": "keyv-cached-with",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "snomiao <snomiao@gmail.com>",
   "type": "module",
   "exports": {
@@ -9,9 +9,13 @@
   },
   "main": "./dist/index.js",
   "module": "index.ts",
+  "files": [
+    "*.ts",
+    "dist"
+  ],
   "scripts": {
     "build": "bun build index.ts --outdir=dist",
-    "release": "bunx standard-version && git push --follow-tags && npm publish",
+    "release": "bunx commit-and-tag-version && git push --follow-tags && npm publish",
     "test": "bun test"
   },
   "dependencies": {

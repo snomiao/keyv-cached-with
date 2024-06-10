@@ -1,6 +1,7 @@
 {
   "name": "keyv-cached-with",
-  "version": "0.0.5",
+  "version": "0.0.6",
+  "description": "HOF(High order function) to cache a function with keyv",
   "author": "snomiao <snomiao@gmail.com>",
   "type": "module",
   "exports": {

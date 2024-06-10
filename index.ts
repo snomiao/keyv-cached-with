@@ -9,7 +9,8 @@ const _KeyvCachedWith =
   ) =>
   async (...args: ArgumentTypes<Fn>): Promise<V> => {
     const key =
-      md5(String(fn)).slice(0, 8) + md5(JSON.stringify(args)).slice(0, 8);
+      md5(String(fn)).slice(0, 8) +
+      md5(JSON.stringify(args.slice(0, fn.length))).slice(0, 8);
     const cache = (await keyv.get(key)) as V;
     if (cache) return cache;
     const result = (await fn(...args)) as V;

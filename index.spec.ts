@@ -1,5 +1,5 @@
 import Keyv from "keyv";
-import { KeyvCachedWith } from ".";
+import { KeyvCachedWith } from "./index";
 
 it("works in full-args call", async () => {
   let i = 0;

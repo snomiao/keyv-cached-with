@@ -1,6 +1,6 @@
 # keyv-cached-with
 
-HOF(High order function) to use keyv
+HOF(High order function) to cache a function with keyv
 
 ## Usage
 

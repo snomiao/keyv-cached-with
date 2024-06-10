@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.9](https://github.com/snomiao/keyv-cached-with/compare/v0.0.8...v0.0.9) (2024-06-10)
+
+
+### Bug Fixes
+
+* **main:** curry by manual ([33337a5](https://github.com/snomiao/keyv-cached-with/commit/33337a54db9973c24d1c419be80db52ffbdeb422))
+* **main:** misc ([f52f869](https://github.com/snomiao/keyv-cached-with/commit/f52f86958dbdfb69e1c9832bb60235f4a9ac8f8a))
+
 ## [0.0.8](https://github.com/snomiao/keyv-cached-with/compare/v0.0.6...v0.0.8) (2024-06-10)
 
 

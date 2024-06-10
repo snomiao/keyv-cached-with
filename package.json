@@ -6,7 +6,8 @@
   "exports": {
     "import": "./dist/index.js",
     "types": "./index.ts"
-  },
+    },
+  "main": "./dist/index.js",
   "module": "index.ts",
   "scripts": {
     "build": "bun build index.ts --outdir=dist",

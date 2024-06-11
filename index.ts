@@ -1,6 +1,6 @@
 import Keyv from "keyv";
 import md5 from "md5";
-import { curry } from "rambda";
+import { curry, curryN } from "rambda";
 import type { Function } from "ts-toolbelt/out/Function/Function";
 // util util util util util util util util util util util util util util util
 type Awaitable<R> = Promise<R> | R;
@@ -33,7 +33,7 @@ async function _<
 }
 // export export export export export export export export export export expo
 // prettier-ignore
-export const KeyvCachedWith = curry(_) as
+export const KeyvCachedWith = curryN(3,_) as
   (<A extends $[1], B extends $<A>[2], C extends $<A, B>[3]>
     (keyv: A, fn: B, ...args: C) =>                           $<A, B, C>[0]) &
   (<A extends $[1], B extends $<A>[2]>

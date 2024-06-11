@@ -76,9 +76,9 @@ it("works in slot1", async () => {
   expectTypeOf(f2).not.toEqualTypeOf<any>();
   expectTypeOf(f2).not.toEqualTypeOf<unknown>();
   expectTypeOf(await f2(123)).toEqualTypeOf<string>();
-  expect(await f2(2)).toBe("2/1");
-  expect(await f2(5)).toBe("5/2");
-  expect(await f2(2)).toBe("2/1"); // use cache
+  expect(await f2(2)).toBe("2/2");
+  expect(await f2(5)).toBe("5/3");
+  expect(await f2(2)).toBe("2/2"); // use cache
 
   const CachedWith1 = fn(new Keyv<string>());
   const v1 = await CachedWith1((a: number) => `${a}/${++i}`, 123);

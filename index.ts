@@ -28,9 +28,7 @@ async function _<
   const needleArgs = args.slice(0, fn.length);
   const argsKey = JSON.stringify(needleArgs);
   const fnKey = String(fn);
-  const readableKey = (fnKey + argsKey)
-    .replace(/\W+|[aioute]/g, "")
-    .slice(0, 16);
+  const readableKey = (fnKey + argsKey).replace(/\W+/g, "").slice(0, 16);
   const hashKey = md5(String(fn)).slice(0, 8) + md5(argsKey).slice(0, 8);
   const key = readableKey + hashKey;
   const cache = await keyv.get(key);

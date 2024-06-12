@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.12](https://github.com/snomiao/keyv-cached-with/compare/v0.0.11...v0.0.12) (2024-06-12)
+
+
+### Bug Fixes
+
+* **main:** parameters ([0d1aacb](https://github.com/snomiao/keyv-cached-with/commit/0d1aacb789237b4c940305c8c2dc0b745f1ba7ed))
+
 ## [0.0.11](https://github.com/snomiao/keyv-cached-with/compare/v0.0.10...v0.0.11) (2024-06-12)
 
 

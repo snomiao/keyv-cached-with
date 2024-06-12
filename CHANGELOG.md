@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.10](https://github.com/snomiao/keyv-cached-with/compare/v0.0.9...v0.0.10) (2024-06-12)
+
+
+### Features
+
+* **hash:** with readalbe key ([5560617](https://github.com/snomiao/keyv-cached-with/commit/5560617b8ccb08f54256a3779b8ec0a1d6c0225d))
+* **main:** curry ([ece805c](https://github.com/snomiao/keyv-cached-with/commit/ece805c15df6dc4616cf1c430eb543aa97d914b9))
+
+
+### Bug Fixes
+
+* **curry:** use n ([8ed5e8d](https://github.com/snomiao/keyv-cached-with/commit/8ed5e8d1a15260a9b5a9ad24c2bb7c490df38808))
+* **hash:** readable key length limit ([6f85ead](https://github.com/snomiao/keyv-cached-with/commit/6f85ead0894bfa38677f60e07ebdd4d1a1efb11d))
+
 ## [0.0.9](https://github.com/snomiao/keyv-cached-with/compare/v0.0.8...v0.0.9) (2024-06-10)
 
 

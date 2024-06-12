@@ -1,6 +1,6 @@
 {
   "name": "keyv-cached-with",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "HOF(High order function) to cache a function with keyv",
   "author": "snomiao <snomiao@gmail.com>",
   "type": "module",
@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "bun build index.ts --outdir=dist",
+    "prerelease": "bun run build && bun run test",
     "release": "bunx commit-and-tag-version && git push --follow-tags && npm publish",
     "test": "bun test"
   },

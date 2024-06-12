@@ -11,10 +11,10 @@ type KeyV<KV extends Keyv> = KV extends Keyv<infer R> ? Awaitable<R> : never;
 type $<
   KEV extends Keyv<any>
             = Keyv<any>,
-  FUN extends Function<any[], KeyV<KEV>>
-            = Function<any[], KeyV<KEV>>,
-  ARG extends Parameters<FUN>
-            = Parameters<FUN>,
+  FUN extends (arg: unknown, ...rest: any[])=> KeyV<KEV>
+            = (arg: any, ...rest: any[])=> KeyV<KEV>,
+  ARG extends FUN extends (arg: infer A, ...args: infer P) => any ? [A, ...P] : never
+            = FUN extends (arg: infer A, ...args: infer P) => any ? [A, ...P] : never,
   RET extends Repromise<ReturnType<FUN> & KeyV<KEV>>
             = Repromise<ReturnType<FUN> & KeyV<KEV>>
 > = [RET, KEV, FUN, ARG];
@@ -35,7 +35,7 @@ async function _<
   const key = readableKey + hashKey;
   const cache = await keyv.get(key);
   if (cache) return cache as Z;
-  const result = await fn(...args);
+  const result = await fn(args[0], ...args.slice(1));
   await keyv.set(key, result);
   return result as Z;
 }

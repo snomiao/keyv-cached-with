@@ -18,11 +18,19 @@ it("works in slot3", async () => {
   expectTypeOf(r9).toEqualTypeOf<unknown>();
 
   // num
-  const r7: number = await fn(new Keyv<unknown>(), async () => 123);
+  const withoutArgs = await fn(new Keyv<unknown>(), () => 123, null);
+  expectTypeOf(withoutArgs).toEqualTypeOf<number>();
+  const r7: number = await fn(new Keyv<unknown>(), async () => 123, undefined);
   expectTypeOf(r7).toEqualTypeOf<number>();
+  expect(r7).toBe(123);
   // obj
-  const r8: { a: number } = await fn(new Keyv<unknown>(), () => ({ a: 123 }));
+  const r8: { a: number } = await fn(
+    new Keyv<unknown>(),
+    () => ({ a: 123 }),
+    undefined
+  );
   expectTypeOf(r8).toEqualTypeOf<{ a: number }>();
+  expect(r8.a).toBe(123);
 });
 it("works in slot2", async () => {
   let i = 0;
@@ -67,6 +75,8 @@ it("works in slot2", async () => {
   expectTypeOf(await fAny2("abc")).toEqualTypeOf<any>();
   const fAny3 = fn(new Keyv<unknown>(), <T>(a: T) => a);
   expectTypeOf(await fAny3("abc" as any)).toEqualTypeOf<unknown>();
+  const fWithoutArgs = fn(new Keyv<unknown>(), () => 123);
+  expectTypeOf(await fWithoutArgs(null)).toEqualTypeOf<number>();
 });
 
 it("works in slot1", async () => {
@@ -79,6 +89,11 @@ it("works in slot1", async () => {
   expect(await f2(2)).toBe("2/2");
   expect(await f2(5)).toBe("5/3");
   expect(await f2(2)).toBe("2/2"); // use cache
+
+  const cached = fn(new Keyv<unknown>());
+  const fWithoutArgs = cached(() => 123);
+  expectTypeOf(await fWithoutArgs(null)).toEqualTypeOf<number>();
+  expectTypeOf(fWithoutArgs).parameters.toEqualTypeOf<[unknown]>();
 
   const CachedWith1 = fn(new Keyv<string>());
   const v1 = await CachedWith1((a: number) => `${a}/${++i}`, 123);

@@ -7,14 +7,17 @@ type Awaitable<R> = Promise<R> | R;
 type Repromise<T> = Promise<Awaited<T>>;
 type KeyV<KV extends Keyv> = KV extends Keyv<infer R> ? Awaitable<R> : never;
 // type type type type type type type type type type type type type type type
+// prettier-ignore
 type $<
-  KV extends Keyv = Keyv,
-  FN extends Function<any[], KeyV<KV>> = Function<any, KeyV<KV>>,
-  AR extends Parameters<FN> = Parameters<FN>,
-  RE extends Repromise<ReturnType<FN> & KeyV<KV>> = Repromise<
-    ReturnType<FN> & KeyV<KV>
-  >
-> = [RE, KV, FN, AR];
+  KEV extends Keyv<any>
+            = Keyv<any>,
+  FUN extends Function<any[], KeyV<KEV>>
+            = Function<any[], KeyV<KEV>>,
+  ARG extends Parameters<FUN>
+            = Parameters<FUN>,
+  RET extends Repromise<ReturnType<FUN> & KeyV<KEV>>
+            = Repromise<ReturnType<FUN> & KeyV<KEV>>
+> = [RET, KEV, FUN, ARG];
 // impl impl impl impl impl impl impl impl impl impl impl impl impl impl impl
 async function _<
   A extends $[1],
@@ -22,29 +25,26 @@ async function _<
   C extends $<A, B>[3],
   Z extends $<A, B, C>[0]
 >(keyv: A, fn: B, ...args: C): Promise<Z> {
-  const key =
-    md5(String(fn)).slice(0, 8) +
-    md5(JSON.stringify(args.slice(0, fn.length))).slice(0, 8);
+  const needleArgs = args.slice(0, fn.length);
+  const argsKey = JSON.stringify(needleArgs);
+  const fnKey = String(fn);
+  const readableKey = (fnKey + argsKey).replace(/\W+|[aeiout]/g, " ");
+  const hashKey = md5(String(fn)).slice(0, 8) + md5(argsKey).slice(0, 8);
+  const key = readableKey + hashKey;
   const cache = await keyv.get(key);
-  if (cache) return cache;
+  if (cache) return cache as Z;
   const result = await fn(...args);
   await keyv.set(key, result);
-  return result;
+  return result as Z;
 }
 // export export export export export export export export export export expo
+export const KeyvCachedWith = curryN(3, _) as CURRIED;
 // prettier-ignore
-export const KeyvCachedWith = curryN(3,_) as
-  (<A extends $[1], B extends $<A>[2], C extends $<A, B>[3]>
-    (keyv: A, fn: B, ...args: C) =>                           $<A, B, C>[0]) &
-  (<A extends $[1], B extends $<A>[2]>
-    (keyv: A, fn: B) =>
-      <C extends $<A, B>[3]>
-        (...args: C) =>                                       $<A, B, C>[0]) &
-  (<A extends $[1]>
-    (keyv: A) => (
-      (<B extends $<A>[2], C extends $<A, B>[3]>
-        (fn: B, ...args: C) =>                                $<A, B, C>[0]) &
-      (<B extends $<A>[2]>
-        (fn: B) =>
-          <C extends $<A, B>[3]>
-            (...args: C) =>                                   $<A, B, C>[0])))
+type CURRIED = (
+<A extends $[1], B extends $<A>[2], C extends $<A, B>[3]>(keyv: A, fn: B, ...args: C) => $<A, B, C>[0]) & (
+<A extends $[1], B extends $<A>[2]>(keyv: A, fn: B) =>
+<C extends $<A, B>[3]>(...args: C) => $<A, B, C>[0]) & (
+<A extends $[1]>(keyv: A) => ((
+<B extends $<A>[2], C extends $<A, B>[3]>(fn: B, ...args: C) => $<A, B, C>[0]) & (
+<B extends $<A>[2]>(fn: B) =>
+<C extends $<A, B>[3]>(...args: C) => $<A, B, C>[0])))

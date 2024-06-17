@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.13](https://github.com/snomiao/keyv-cached-with/compare/v0.0.12...v0.0.13) (2024-06-17)
+
+
+### Bug Fixes
+
+* **main:** restore readable name ([59d4417](https://github.com/snomiao/keyv-cached-with/commit/59d441730c5edb23f54b1351ce472b87892dea02))
+* **sno-dev:** remove function from ts-toolbelt ([1c0cdde](https://github.com/snomiao/keyv-cached-with/commit/1c0cddebdc2ce11c4d9ed28145554b5882526d6f))
+
 ## [0.0.12](https://github.com/snomiao/keyv-cached-with/compare/v0.0.11...v0.0.12) (2024-06-12)
 
 

@@ -1,7 +1,6 @@
 import Keyv from "keyv";
 import md5 from "md5";
-import { curry, curryN } from "rambda";
-import type { Function } from "ts-toolbelt/out/Function/Function";
+import { curryN } from "rambda";
 // util util util util util util util util util util util util util util util
 type Awaitable<R> = Promise<R> | R;
 type Repromise<T> = Promise<Awaited<T>>;

@@ -23,7 +23,7 @@ async function _KeyvCachedWith<
   A extends $[1],
   B extends $<A>[2],
   C extends $<A, B>[3],
-  Z extends $<A, B, C>[0],
+  Z extends $<A, B, C>[0]
 >(keyv: A, fn: B, ...args: C): Promise<Z> {
   const needleArgs = args.slice(0, fn.length);
   const argsKey = JSON.stringify(needleArgs);

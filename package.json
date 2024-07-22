@@ -26,6 +26,7 @@
     "@types/jest": "^29.5.12",
     "expect-type": "^0.19.0",
     "just-curry-it": "^5.3.0",
+    "sflow": "^1.15.1",
     "ts-macros": "^2.6.0",
     "typescript": "^5.4.5"
   },

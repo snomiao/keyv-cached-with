@@ -1,6 +1,6 @@
 {
   "name": "keyv-cached-with",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "HOF(High order function) to cache a function with keyv",
   "author": "snomiao <snomiao@gmail.com>",
   "type": "module",

@@ -18,6 +18,15 @@ type $<
             = Repromise<ReturnType<FUN> & KeyV<KEV>>
 > = [RET, KEV, FUN, ARG];
 // impl impl impl impl impl impl impl impl impl impl impl impl impl impl impl
+/** 
+ * @author snomiao<snomiao@gmail.com>
+ * @param keyv = new Keyv<unknown>() object
+ * 
+ * Note: please use `new Keyv<unknown>()` as the instance.
+ * Otherwise KeyvCachedWith will not return correct type because of Keyv default typed as any.
+ * 
+ * @param fn function to be cached.
+ */
 export const KeyvCachedWith: CurriedKeyvCachedWith = curryN(3, _KeyvCachedWith);
 async function _KeyvCachedWith<
   A extends $[1],

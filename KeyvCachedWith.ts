@@ -2,9 +2,9 @@ import Keyv from "keyv";
 import md5 from "md5";
 import { curryN } from "rambda";
 // util util util util util util util util util util util util util util util
-// type Awaitable<R> = Promise<R> | R;
-// type Repromise<T> = Promise<Awaited<T>>; // ts still cannot handle this
-type KeyV<KV extends Keyv> = KV extends Keyv<infer R> ? Promise<R> : never;
+type Awaitable<R> = Promise<R> | R;
+type Repromise<T> = Promise<Awaited<T>>;
+type KeyV<KV extends Keyv> = KV extends Keyv<infer R> ? Awaitable<R> : never;
 // type type type type type type type type type type type type type type type
 // prettier-ignore
 type $<
@@ -14,8 +14,8 @@ type $<
             = (arg: any, ...rest: any[])=> KeyV<KEV>,
   ARG extends FUN extends (arg: infer A, ...args: infer P) => any ? [A, ...P] : never
             = FUN extends (arg: infer A, ...args: infer P) => any ? [A, ...P] : never,
-  RET extends ReturnType<FUN> & KeyV<KEV>
-            = ReturnType<FUN> & KeyV<KEV>,
+  RET extends Repromise<ReturnType<FUN> & KeyV<KEV>>
+            = Repromise<ReturnType<FUN> & KeyV<KEV>>,
 > = [RET, KEV, FUN, ARG];
 // impl impl impl impl impl impl impl impl impl impl impl impl impl impl impl
 /**

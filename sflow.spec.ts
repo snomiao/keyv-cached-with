@@ -21,7 +21,7 @@ it("survives with sflow", async () => {
   ).toEqual([1, 2, 2, 3]);
   expect(fn).toHaveBeenCalledTimes(3);
   const et = +new Date();
-  console.log(et - st);
+  console.log(et - st + "ms");
   expect(((et - st) / 100).toFixed()).toEqual("3");
 });
 it("fix typing with sflow", async () => {
@@ -34,14 +34,15 @@ it("fix typing with sflow", async () => {
           fn(e);
           await sleep(100);
           console.log(e);
-          return "string";
+          return e.toString();
         })
       )
-      .map((e) => expectTypeOf(e).toBeString())
+      .forEach((e) => expectTypeOf(e).toBeString())
+      .map((e) => +e)
       .toArray()
   ).toEqual([1, 2, 2, 3]);
   expect(fn).toHaveBeenCalledTimes(3);
   const et = +new Date();
-  console.log(et - st);
+  console.log(et - st + "ms");
   expect(((et - st) / 100).toFixed()).toEqual("3");
 });

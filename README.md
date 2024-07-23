@@ -52,4 +52,4 @@ it("works with curry", async () => {
   expect(await fn4(2)).toBe("2/4"); // use cache
 });
 
-```p
+```

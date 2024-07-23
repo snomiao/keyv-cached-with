@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.18](https://github.com/snomiao/keyv-cached-with/compare/v0.0.17...v0.0.18) (2024-07-23)
+
+
+### Bug Fixes
+
+* **main:** add notes ([a3b10ee](https://github.com/snomiao/keyv-cached-with/commit/a3b10ee03c38b955d8b037536093043ea4ef1364))
+* **main:** ensure promise ([60e1f16](https://github.com/snomiao/keyv-cached-with/commit/60e1f16484506914405786ec255c5fad32085248))
+
 ## [0.0.17](https://github.com/snomiao/keyv-cached-with/compare/v0.0.16...v0.0.17) (2024-07-22)
 
 ## [0.0.16](https://github.com/snomiao/keyv-cached-with/compare/v0.0.15...v0.0.16) (2024-07-22)

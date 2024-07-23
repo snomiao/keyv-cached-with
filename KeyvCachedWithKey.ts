@@ -21,7 +21,7 @@ async function _KeyvCachedWithKey<
   A extends $[1],
   B extends $<A>[2],
   C extends $<A, B>[3],
-  Z extends $<A, B, C>[0],
+  Z extends $<A, B, C>[0]
 >(keyv: A, key: B, fetcher: C): Promise<Z> {
   const cache = await keyv.get(key);
   if (cache) return cache as Z;

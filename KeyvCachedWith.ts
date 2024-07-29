@@ -4,18 +4,36 @@ import { curryN } from "rambda";
 // util util util util util util util util util util util util util util util
 type Awaitable<R> = Promise<R> | R;
 type Repromise<T> = Promise<Awaited<T>>;
-type KeyV<KV extends Keyv> = KV extends Keyv<infer R> ? Awaitable<R> : never;
+type KeyvType<KV extends Keyv> = KV extends Keyv<infer R>
+  ? Awaitable<R>
+  : never;
+type CacheFun<KEV extends Keyv<any>> = (
+  arg: unknown,
+  ...rest: any[]
+) => KeyvType<KEV>;
+
+type FunArgs<KEV extends Keyv<any>, FUN extends CacheFun<KEV>> = FUN extends (
+  arg: infer A,
+  ...args: infer P
+) => any
+  ? [A, ...P]
+  : never;
+
+type Ret<FUN extends CacheFun<KEV>, KEV extends Keyv<any>> = Repromise<
+  ReturnType<FUN> & KeyvType<KEV>
+>;
+
 // type type type type type type type type type type type type type type type
 // prettier-ignore
 type $<
   KEV extends Keyv<any>
             = Keyv<any>,
-  FUN extends (arg: unknown, ...rest: any[])=> KeyV<KEV>
-            = (arg: any, ...rest: any[])=> KeyV<KEV>,
-  ARG extends FUN extends (arg: infer A, ...args: infer P) => any ? [A, ...P] : never
-            = FUN extends (arg: infer A, ...args: infer P) => any ? [A, ...P] : never,
-  RET extends Repromise<ReturnType<FUN> & KeyV<KEV>>
-            = Repromise<ReturnType<FUN> & KeyV<KEV>>,
+  FUN extends CacheFun<KEV>
+            = (arg: any, ...rest: any[])=> KeyvType<KEV>,
+  ARG extends FunArgs<KEV, FUN>
+            = FunArgs<KEV, FUN>,
+  RET extends Ret<FUN, KEV>
+            = Ret<FUN, KEV>,
 > = [RET, KEV, FUN, ARG];
 // impl impl impl impl impl impl impl impl impl impl impl impl impl impl impl
 /**

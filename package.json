@@ -1,6 +1,6 @@
 {
   "name": "keyv-cached-with",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "HOF(High order function) to cache a function with keyv",
   "keywords": [],
   "homepage": "https://github.com/snomiao/keyv-cached-with#readme",

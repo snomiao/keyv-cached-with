@@ -1,6 +1,6 @@
 {
   "name": "keyv-cached-with",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "HOF(High order function) to cache a function with keyv",
   "keywords": [],
   "homepage": "https://github.com/snomiao/keyv-cached-with#readme",
@@ -33,7 +33,9 @@
     "test": "bun test"
   },
   "dependencies": {
+    "@types/json-stable-stringify": "^1.0.36",
     "@types/md5": "^2.3.5",
+    "json-stable-stringify": "^1.1.1",
     "md5": "^2.3.0",
     "rambda": "^9.2.0"
   },

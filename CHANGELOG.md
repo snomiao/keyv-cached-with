@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.19](https://github.com/snomiao/keyv-cached-with/compare/v0.0.18...v0.0.19) (2024-08-08)
+
+
+### Bug Fixes
+
+* **main:** cachefn type ([ad6d3c8](https://github.com/snomiao/keyv-cached-with/commit/ad6d3c869b58d4f4b3c9848ec2021e182f46ce04))
+* **main:** kcw repromise ([39840c1](https://github.com/snomiao/keyv-cached-with/commit/39840c1e7c3095bf434e6328434901e0149ba29b))
+
 ## [0.0.18](https://github.com/snomiao/keyv-cached-with/compare/v0.0.17...v0.0.18) (2024-07-23)
 
 

@@ -42,12 +42,15 @@ type $<
  * @param keyv = new Keyv<unknown>() object
  *
  * Note: please use `new Keyv<unknown>()` as the instance.
- * Otherwise KeyvCachedWith will not return correct type because of Keyv default typed as any.
+ * Otherwise KeyvCachedQuery will not return correct type because of Keyv default typed as any.
  *
  * @param fn function to be cached.
  */
-export const KeyvCachedWith: CurriedKeyvCachedWith = curryN(3, _KeyvCachedWith);
-async function _KeyvCachedWith<
+export const KeyvCachedQuery: CurriedKeyvCachedQuery = curryN(
+  3,
+  _KeyvCachedQuery
+);
+async function _KeyvCachedQuery<
   A extends $[1],
   B extends $<A>[2],
   C extends $<A, B>[3],
@@ -55,8 +58,7 @@ async function _KeyvCachedWith<
 >(keyv: A, fn: B, ...args: C): Promise<Z> {
   const needleArgs = args.slice(0, fn.length);
   const argsKey = stringify(needleArgs);
-  const fnKey = String(fn);
-  const readableKey = (argsKey + fnKey).replace(/\W+/g, "").slice(0, 16);
+  const readableKey = argsKey.replace(/\W+/g, "").slice(0, 16);
   const hashKey = md5(String(fn) + argsKey).slice(0, 16);
   const key = readableKey + hashKey;
   const cache = await keyv.get(key);
@@ -66,7 +68,7 @@ async function _KeyvCachedWith<
   return result as Z;
 }
 // prettier-ignore
-type CurriedKeyvCachedWith = (
+type CurriedKeyvCachedQuery = (
 <A extends $[1], B extends $<A>[2], C extends $<A, B>[3]>(keyv: A, fn: B, ...args: C) => $<A, B, C>[0]) & (
 <A extends $[1], B extends $<A>[2]>(keyv: A, fn: B) =>
 <C extends $<A, B>[3]>(...args: C) => $<A, B, C>[0]) & (
@@ -74,5 +76,3 @@ type CurriedKeyvCachedWith = (
 <B extends $<A>[2], C extends $<A, B>[3]>(fn: B, ...args: C) => $<A, B, C>[0]) & (
 <B extends $<A>[2]>(fn: B) =>
 <C extends $<A, B>[3]>(...args: C) => $<A, B, C>[0])))
-
-export { KeyvCachedWithKey } from "./KeyvCachedWithKey";

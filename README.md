@@ -1,55 +1,87 @@
 # keyv-cached-with
 
-HOF(High order function) to cache a function with keyv
+A higher-order function (HOF) for caching function results using [Keyv](https://github.com/jaredwray/keyv).
+
+[![npm version](https://badge.fury.io/js/keyv-cached-with.svg)](https://badge.fury.io/js/keyv-cached-with)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Installation
+
+```bash
+npm install keyv-cached-with keyv
+# or
+yarn add keyv-cached-with keyv
+# or
+bun add keyv-cached-with keyv
+```
+
+## Features
+
+- Cache function results with Keyv
+- Support for curried and direct function calls
+- Type-safe with TypeScript
+- Minimal dependencies
 
 ## Usage
 
-- [Check index.spec.ts](./index.spec.ts)
+### Basic Usage
 
 ```ts
 import Keyv from "keyv";
 import { KeyvCachedWith } from "keyv-cached-with";
 
-it("works in full-args call", async () => {
-  let i = 0;
-  const kv = new Keyv();
-  const fn1 = KeyvCachedWith(kv, async (a: number) => `${a}/${++i}`) satisfies (
-    a: number
-  ) => Promise<string>;
-  expect(await fn1(1)).toBe("1/1");
-  expect(await fn1(5)).toBe("5/2");
-  expect(await fn1(1)).toBe("1/1");
+// Create a Keyv instance
+const keyv = new Keyv();
 
-  const fn2 = KeyvCachedWith(kv, async (a: number) => `${a}/${++i}`);
-  expect(await fn2(1)).toBe("1/1");
-  expect(await fn2(5)).toBe("5/2");
-  expect(await fn2(1)).toBe("1/1");
+// Create a cached function
+const expensiveFunction = KeyvCachedWith(keyv, async (a: number) => {
+  // Expensive operation here
+  return `Result for ${a}`;
 });
 
-it("works with curry", async () => {
-  const CachedWith = KeyvCachedWith(new Keyv());
-  let i = 0;
+// First call will execute the function
+await expensiveFunction(1); // "Result for 1"
 
-  const fn2 = CachedWith((a: number) => `${a}/${++i}`) satisfies (
-    a: number
-  ) => Promise<string>;
-  expect(await fn2(2)).toBe("2/1");
-  expect(await fn2(5)).toBe("5/2");
-  expect(await fn2(2)).toBe("2/1"); // use cache
-
-  // fn3's content is same with fn2
-  const fn3 = CachedWith((a: number) => `${a}/${++i}`) satisfies (
-    a: number
-  ) => Promise<string>;
-  expect(await fn3(2)).toBe("2/1"); // use cache
-  expect(await fn3(5)).toBe("5/2"); // use cache
-  expect(await fn3(6)).toBe("6/3"); // eval
-
-  // fn4's content is different
-  const fn4 = CachedWith((a: number) => `${a}/${++i}` + "".trim());
-  expect(await fn4(2)).toBe("2/4"); // use cache
-  expect(await fn4(5)).toBe("5/5");
-  expect(await fn4(2)).toBe("2/4"); // use cache
-});
-
+// Second call with same argument will use cached result
+await expensiveFunction(1); // "Result for 1" (from cache)
 ```
+
+### Curried Usage
+
+```ts
+import Keyv from "keyv";
+import { KeyvCachedWith } from "keyv-cached-with";
+
+// Create a caching function with a specific Keyv instance
+const CachedWith = KeyvCachedWith(new Keyv());
+
+// Create multiple cached functions using the same Keyv instance
+const cachedFunction1 = CachedWith(async (param: string) => {
+  // Function implementation
+  return `Result for ${param}`;
+});
+
+const cachedFunction2 = CachedWith(async (a: number, b: number) => {
+  // Another function implementation
+  return a + b;
+});
+```
+
+## API
+
+### KeyvCachedWith
+
+```ts
+KeyvCachedWith(keyv: Keyv, fn: Function): CachedFunction
+// or curried form
+KeyvCachedWith(keyv: Keyv)(fn: Function): CachedFunction
+```
+
+### Additional Exports
+
+- `KeyvCachedQuery` - For caching database or API queries
+- `KeyvCachedWithKey` - For custom cache key generation
+
+## License
+
+MIT © [snomiao](https://github.com/snomiao)

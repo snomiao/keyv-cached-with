@@ -33,13 +33,13 @@
     "test": "bun test"
   },
   "dependencies": {
-    "@types/json-stable-stringify": "^1.0.36",
-    "@types/md5": "^2.3.5",
     "json-stable-stringify": "^1.1.1",
     "md5": "^2.3.0",
     "rambda": "^9.2.0"
   },
   "devDependencies": {
+    "@types/json-stable-stringify": "^1.0.36",
+    "@types/md5": "^2.3.5",
     "@types/bun": "^1.1.6",
     "@types/jest": "^29.5.12",
     "expect-type": "^0.19.0",
